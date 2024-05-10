@@ -2,15 +2,17 @@ package com.konaesan.controller;
 
 import com.konaesan.domain.Task;
 import com.konaesan.service.TaskService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/tasks")
 public class TaskController
 {
-    @Autowired
-    TaskService taskService;
+    private final TaskService taskService;
+
+    public TaskController(TaskService taskService) {
+        this.taskService = taskService;
+    }
 
     @GetMapping( value = {"", "/"})
     public Iterable<Task> getTasks() {
